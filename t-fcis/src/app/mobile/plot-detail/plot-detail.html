@@ -1,0 +1,29 @@
+
+<div *ngIf="samplePlot$ | async as plot">
+  <mat-card>
+    <mat-card-header>
+      <mat-card-title>Sample Plot: {{ plot.plotNumber }}</mat-card-title>
+      <mat-card-subtitle>Survey Date: {{ plot.surveyDate | date }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+      <h3>Plot Details</h3>
+      <p><strong>Latitude:</strong> {{ plot.location.latitude }}</p>
+      <p><strong>Longitude:</strong> {{ plot.location.longitude }}</p>
+
+      <h3>Slope Correction Calculator</h3>
+      <mat-form-field>
+        <mat-label>Slope (degrees)</mat-label>
+        <input matInput type="number" [(ngModel)]="plot.slope" (ngModelChange)="calculateSlopeCorrection(plot.slope)">
+      </mat-form-field>
+
+      <div *ngIf="correctedRadius !== null">
+        <p><strong>Corrected Radius for Main Plot (0.05 ha):</strong> {{ correctedRadius | number:'1.2-2' }} meters</p>
+      </div>
+
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary">Start Tree Tally</button>
+      <a mat-button routerLink="/plots">Back to List</a>
+    </mat-card-actions>
+  </mat-card>
+</div>

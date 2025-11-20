@@ -1,0 +1,8 @@
+
+<mat-list>
+  <div mat-subheader>Sample Plots</div>
+  <mat-list-item *ngFor="let plot of samplePlots$ | async" [routerLink]="['/plot', plot.id]">
+    <div mat-line>{{ plot.plotNumber }}</div>
+    <div mat-line>{{ plot.surveyDate | date }} - Surveyed by {{ plot.surveyor }}</div>
+  </mat-list-item>
+</mat-list>
